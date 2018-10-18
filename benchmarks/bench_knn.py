@@ -85,7 +85,7 @@ def bench_milk(X, y, T, valid):
     start = datetime.now()
     learner = kNN(n_neighbors)
     model = learner.train(X, y)
-    score = np.mean(map(model.apply, T) == valid)
+    score = np.mean(list(map(model.apply, T)) == valid)
     return score, datetime.now() - start
 
 
@@ -96,39 +96,39 @@ if __name__ == '__main__':
     import warnings; warnings.simplefilter('ignore')
     np.seterr(all='ignore')
 
-    print __doc__ + '\n'
+    print(__doc__ + '\n')
     if not len(sys.argv) == 2:
-        print misc.USAGE % __file__
+        print(misc.USAGE % __file__)
         sys.exit(-1)
     else:
         dataset = sys.argv[1]
 
-    print 'Loading data ...'
+    print('Loading data ...')
     data = misc.load_data(dataset)
 
-    print 'Done, %s samples with %s features loaded into ' \
-      'memory' % data[0].shape
+    print('Done, %s samples with %s features loaded into ' \
+      'memory' % data[0].shape)
 
     score, res_shogun = misc.bench(bench_shogun, data)
-    print 'Shogun: mean %.2f, std %.2f\n' % (res_shogun.mean(), res_shogun.std())
-    print 'Score: %.2f' % score
+    print('Shogun: mean %.2f, std %.2f\n' % (res_shogun.mean(), res_shogun.std()))
+    print('Score: %.2f' % score)
 
     score, res_mdp = misc.bench(bench_mdp, data)
-    print 'MDP: mean %.2f, std %.2f\n' % (res_mdp.mean(), res_mdp.std())
-    print 'Score: %.2f' % score
+    print('MDP: mean %.2f, std %.2f\n' % (res_mdp.mean(), res_mdp.std()))
+    print('Score: %.2f' % score)
 
     score, res_skl = misc.bench(bench_skl, data)
-    print 'scikits.learn: mean %.2f, std %.2f\n' % (res_skl.mean(), res_skl.std())
-    print 'Score: %.2f' % score
+    print('scikits.learn: mean %.2f, std %.2f\n' % (res_skl.mean(), res_skl.std()))
+    print('Score: %.2f' % score)
 
     score, res_mlpy = misc.bench(bench_mlpy, data)
-    print 'MLPy: mean %.2f, std %.2f\n' % (res_mlpy.mean(), res_mlpy.std())
-    print 'Score: %.2f' % score
+    print('MLPy: mean %.2f, std %.2f\n' % (res_mlpy.mean(), res_mlpy.std()))
+    print('Score: %.2f' % score)
 
     score, res_milk = misc.bench(bench_milk, data)
-    print 'milk: mean %.2f, std %.2f\n' % (res_milk.mean(), res_milk.std())
-    print 'Score: %.2f' % score
+    print('milk: mean %.2f, std %.2f\n' % (res_milk.mean(), res_milk.std()))
+    print('Score: %.2f' % score)
 
     score, res_pymvpa = misc.bench(bench_pymvpa, data)
-    print 'PyMVPA: mean %.2f, std %.2f\n' % (res_pymvpa.mean(), res_pymvpa.std())
-    print 'Score: %.2f' % score
+    print('PyMVPA: mean %.2f, std %.2f\n' % (res_pymvpa.mean(), res_pymvpa.std()))
+    print('Score: %.2f' % score)

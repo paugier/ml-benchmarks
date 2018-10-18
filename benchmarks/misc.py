@@ -68,7 +68,7 @@ def bench(func, data, n=10):
         time.pop(np.argmax(time))
         time.pop(np.argmin(time))
     except Exception as detail:
-        print '%s error in function %s: ' % (repr(detail), func)
+        print('%s error in function %s: ' % (repr(detail), func))
         time = []
     return score, np.array(time)
 

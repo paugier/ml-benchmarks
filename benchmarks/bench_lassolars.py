@@ -55,30 +55,30 @@ if __name__ == '__main__':
     import warnings; warnings.simplefilter('ignore')
     np.seterr(all='ignore')
 
-    print __doc__ + '\n'
+    print(__doc__ + '\n')
     if not len(sys.argv) == 2:
-        print misc.USAGE % __file__
+        print(misc.USAGE % __file__)
         sys.exit(-1)
     else:
         dataset = sys.argv[1]
 
-    print 'Loading data ...'
+    print('Loading data ...')
     data = misc.load_data(dataset)
 
-    print 'Done, %s samples with %s features loaded into ' \
-      'memory' % data[0].shape
+    print('Done, %s samples with %s features loaded into ' \
+      'memory' % data[0].shape)
 
     score, res_skl = misc.bench(bench_skl, data)
-    print 'scikits.learn: mean %.2f, std %.2f' % (
-        np.mean(res_skl), np.std(res_skl))
-    print 'MSE: %s\n' % score
+    print('scikits.learn: mean %.2f, std %.2f' % (
+        np.mean(res_skl), np.std(res_skl)))
+    print('MSE: %s\n' % score)
 
     score, res_mlpy = misc.bench(bench_mlpy, data)
-    print 'MLPy: mean %.2f, std %.2f' % (
-        np.mean(res_mlpy), np.std(res_mlpy))
-    print 'MSE: %s\n' % score
+    print('MLPy: mean %.2f, std %.2f' % (
+        np.mean(res_mlpy), np.std(res_mlpy)))
+    print('MSE: %s\n' % score)
 
     score, res_pymvpa = misc.bench(bench_pymvpa, data)
-    print 'PyMVPA: mean %.2f, std %.2f' % (
-        np.mean(res_pymvpa), np.std(res_pymvpa))
-    print 'MSE: %s\n' % score
+    print('PyMVPA: mean %.2f, std %.2f' % (
+        np.mean(res_pymvpa), np.std(res_pymvpa)))
+    print('MSE: %s\n' % score)

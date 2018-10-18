@@ -25,19 +25,19 @@ if __name__ == '__main__':
     import warnings; warnings.simplefilter('ignore')
     np.seterr(all='ignore')
 
-    print __doc__ + '\n'
+    print(__doc__ + '\n')
     if not len(sys.argv) == 2:
-        print misc.USAGE % __file__
+        print(misc.USAGE % __file__)
         sys.exit(-1)
     else:
         dataset = sys.argv[1]
 
-    print 'Loading data ...'
+    print('Loading data ...')
     data = misc.load_data(dataset)
 
-    print 'Done, %s samples with %s features loaded into ' \
-      'memory' % data[0].shape
+    print('Done, %s samples with %s features loaded into ' \
+      'memory' % data[0].shape)
 
     res_skl = misc.bench(bench_skl, data)
-    print 'MLPy: mean %.2f, std %.2f\n' % (
-        np.mean(res_skl), np.std(res_skl))
+    print('MLPy: mean %.2f, std %.2f\n' % (
+        np.mean(res_skl), np.std(res_skl)))

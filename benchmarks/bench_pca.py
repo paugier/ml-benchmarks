@@ -94,41 +94,41 @@ if __name__ == '__main__':
     import warnings; warnings.simplefilter('ignore')
     np.seterr(all='ignore')
 
-    print __doc__ + '\n'
+    print(__doc__ + '\n')
     if not len(sys.argv) == 2:
-        print misc.USAGE % __file__
+        print(misc.USAGE % __file__)
         sys.exit(-1)
     else:
         dataset = sys.argv[1]
 
-    print 'Loading data ...'
+    print('Loading data ...')
     data = misc.load_data(dataset)
 
-    print 'Done, %s samples with %s features loaded into ' \
-      'memory' % data[0].shape
+    print('Done, %s samples with %s features loaded into ' \
+      'memory' % data[0].shape)
 
     score, res_mdp = misc.bench(bench_mdp, data)
-    print 'MDP: mean %s, std %s' % (
-        np.mean(res_mdp), np.std(res_mdp))
-    print 'Explained variance: %s\n'% score
+    print('MDP: mean %s, std %s' % (
+        np.mean(res_mdp), np.std(res_mdp)))
+    print('Explained variance: %s\n'% score)
 
     score, res_skl = misc.bench(bench_skl, data)
-    print 'scikits.learn: mean %.2f, std %.2f' % (
-        np.mean(res_skl), np.std(res_skl))
-    print 'Explained variance: %s\n'% score
+    print('scikits.learn: mean %.2f, std %.2f' % (
+        np.mean(res_skl), np.std(res_skl)))
+    print('Explained variance: %s\n'% score)
 
     score, res_pybrain = misc.bench(bench_pybrain, data)
-    print 'Pybrain: mean %s, std %s' % (
-        np.mean(res_pybrain), np.std(res_pybrain))
-    print 'Explained variance: %s\n'% score
+    print('Pybrain: mean %s, std %s' % (
+        np.mean(res_pybrain), np.std(res_pybrain)))
+    print('Explained variance: %s\n'% score)
 
     score, res_milk = misc.bench(bench_milk, data)
-    print 'milk: mean %s, std %s' % (
-        np.mean(res_milk), np.std(res_milk))
-    print 'Explained variance: %s\n'% score
+    print('milk: mean %s, std %s' % (
+        np.mean(res_milk), np.std(res_milk)))
+    print('Explained variance: %s\n'% score)
 
     score, res_pymvpa = misc.bench(bench_pymvpa, data)
-    print 'PyMVPA: mean %s, std %s' % (
-        np.mean(res_pymvpa), np.std(res_pymvpa))
-    print 'Explained variance: %s\n'% score
+    print('PyMVPA: mean %s, std %s' % (
+        np.mean(res_pymvpa), np.std(res_pymvpa)))
+    print('Explained variance: %s\n'% score)
 

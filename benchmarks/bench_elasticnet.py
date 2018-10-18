@@ -59,27 +59,27 @@ if __name__ == '__main__':
     import warnings; warnings.simplefilter('ignore')
     np.seterr(all='ignore')
 
-    print __doc__ + '\n'
+    print(__doc__ + '\n')
 
     if not len(sys.argv) == 2:
-        print misc.USAGE
+        print(misc.USAGE)
         sys.exit(-1)
     else:
         dataset = sys.argv[1]
 
-    print 'Loading data ...'
+    print('Loading data ...')
     data = misc.load_data(dataset)
-    print 'Done, %s samples with %s features loaded into ' \
-          'memory' % data[0].shape
+    print('Done, %s samples with %s features loaded into ' \
+          'memory' % data[0].shape)
 
     score, res_skl = misc.bench(bench_skl, data)
-    print 'scikits.learn: mean %s, std %s' % (res_skl.mean(), res_skl.std())
-    print 'MSE ', score
+    print('scikits.learn: mean %s, std %s' % (res_skl.mean(), res_skl.std()))
+    print('MSE ', score)
 
     score, res_mlpy = misc.bench(bench_mlpy, data)
-    print 'MLPy: mean %s, std %s' % (res_mlpy.mean(), res_mlpy.std())
-    print 'MSE ', score
+    print('MLPy: mean %s, std %s' % (res_mlpy.mean(), res_mlpy.std()))
+    print('MSE ', score)
 
     score, res_pymvpa = misc.bench(bench_pymvpa, data)
-    print 'PyMVPA: mean %s, std %s' % (res_pymvpa.mean(), res_pymvpa.std())
-    print 'MSE ', score
+    print('PyMVPA: mean %s, std %s' % (res_pymvpa.mean(), res_pymvpa.std()))
+    print('MSE ', score)

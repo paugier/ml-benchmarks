@@ -106,7 +106,7 @@ def bench_milk(X, y, T, valid):
     learner = svm.svm_raw(
         kernel=svm.rbf_kernel(sigma=sigma), C=1.)
     model = learner.train(X, y)
-    pred = np.sign(map(model.apply, T))
+    pred = np.sign(list(map(model.apply, T)))
     score = np.mean(pred == valid)
     return score, datetime.now() - start
 
@@ -125,7 +125,7 @@ def bench_orange(X, y, T, valid):
     [orange.EnumVariable(x) for x in columns]
     classValues = ['0', '1']
 
-    domain = orange.Domain(map(orange.FloatVariable, columns),
+    domain = orange.Domain(list(map(orange.FloatVariable, columns)),
                    orange.EnumVariable("class", values=classValues))
     y.shape = (len(y), 1) #reshape for Orange
     y[np.where(y < 0)] = 0 # change class labels to 0..K
@@ -150,66 +150,66 @@ def bench_orange(X, y, T, valid):
 
 if __name__ == '__main__':
     import sys
-    import misc
+    from . import misc
 
     # don't bother me with warnings
     import warnings
     warnings.simplefilter('ignore')
     np.seterr(all='ignore')
 
-    print __doc__ + '\n'
+    print(__doc__ + '\n')
     if not len(sys.argv) == 2:
-        print misc.USAGE % __file__
+        print(misc.USAGE % __file__)
         sys.exit(-1)
     else:
         dataset = sys.argv[1]
 
-    print 'Loading data ...'
+    print('Loading data ...')
     data = misc.load_data(dataset)
 
     # set sigma to something useful
     from milk.unsupervised import pdist
     sigma = np.median(pdist(data[0]))
 
-    print 'Done, %s samples with %s features loaded into ' \
-      'memory' % data[0].shape
+    print('Done, %s samples with %s features loaded into ' \
+      'memory' % data[0].shape)
 
     score, res_shogun = misc.bench(bench_shogun, data)
-    print 'Shogun: mean %.2f, std %.2f' % (
-        np.mean(res_shogun), np.std(res_shogun))
-    print 'Score: %.2f\n' % score
+    print('Shogun: mean %.2f, std %.2f' % (
+        np.mean(res_shogun), np.std(res_shogun)))
+    print('Score: %.2f\n' % score)
 
     score, res_mdp = misc.bench(bench_mdp, data)
-    print 'MDP: mean %.2f, std %.2f' % (
-        np.mean(res_mdp), np.std(res_mdp))
-    print 'Score: %.2f\n' % score
+    print('MDP: mean %.2f, std %.2f' % (
+        np.mean(res_mdp), np.std(res_mdp)))
+    print('Score: %.2f\n' % score)
 
     score, res_skl = misc.bench(bench_skl, data)
-    print 'scikits.learn: mean %.2f, std %.2f' % (
-        np.mean(res_skl), np.std(res_skl))
-    print 'Score: %.2f\n' % score
+    print('scikits.learn: mean %.2f, std %.2f' % (
+        np.mean(res_skl), np.std(res_skl)))
+    print('Score: %.2f\n' % score)
 
     score, res_mlpy = misc.bench(bench_mlpy, data)
-    print 'MLPy: mean %.2f, std %.2f' % (
-        np.mean(res_mlpy), np.std(res_mlpy))
-    print 'Score: %.2f\n' % score
+    print('MLPy: mean %.2f, std %.2f' % (
+        np.mean(res_mlpy), np.std(res_mlpy)))
+    print('Score: %.2f\n' % score)
 
     score, res_pymvpa = misc.bench(bench_pymvpa, data)
-    print 'PyMVPA: mean %.2f, std %.2f' % (
-        np.mean(res_pymvpa), np.std(res_pymvpa))
-    print 'Score: %.2f\n' % score
+    print('PyMVPA: mean %.2f, std %.2f' % (
+        np.mean(res_pymvpa), np.std(res_pymvpa)))
+    print('Score: %.2f\n' % score)
 
     score, res_pybrain = misc.bench(bench_pybrain, data)
-    print 'Pybrain: mean %.2f, std %.2f' % (
-        np.mean(res_pybrain), np.std(res_pybrain))
-    print 'Score: %.2f\n' % score
+    print('Pybrain: mean %.2f, std %.2f' % (
+        np.mean(res_pybrain), np.std(res_pybrain)))
+    print('Score: %.2f\n' % score)
 
     score, res_milk = misc.bench(bench_milk, data)
-    print 'milk: mean %.2f, std %.2f' % (
-        np.mean(res_milk), np.std(res_milk))
-    print 'Score: %.2f\n' % score
+    print('milk: mean %.2f, std %.2f' % (
+        np.mean(res_milk), np.std(res_milk)))
+    print('Score: %.2f\n' % score)
 
     score, res_orange = misc.bench(bench_orange, data)
-    print 'Orange: mean %.2f, std %.2f' % (
-        np.mean(res_orange), np.std(res_orange))
-    print 'Score: %.2f\n' % score
+    print('Orange: mean %.2f, std %.2f' % (
+        np.mean(res_orange), np.std(res_orange)))
+    print('Score: %.2f\n' % score)
